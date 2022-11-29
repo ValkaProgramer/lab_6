@@ -1,0 +1,3 @@
+# Lab 4  
+I added three abstract classes to unite common attributes and methods of several classes: Person, Money, Beverage  
+I have a scenario for every customer. First step is ordering curtain beverage. Second step is making it, which consists of different actions, depending on what type of beverage is being ordered. On this step worker can make mistakes an fail the order. If he doesn't order is finished, money are taken, everything is fine. If he does fail the order customer can go two ways: to wait another beverage, decreasing a chance for leaving tips every time he waits, or leave, not waiting and giving no money and no tips, of course.
