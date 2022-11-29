@@ -53,7 +53,7 @@ class Main{
                 yourMoney.addAmount(0.2 * profit.getAmount());
                 System.out.println("Your money for today are : " + yourMoney.getAmount());
                 baristaMoney.addAmount(profit.getAmount() * 0.5);
-                System.out.println("You paid Barista " + baristaMoney.getAmount() * (someVar++ - 7) + " average");
+                System.out.println("You paid Barista " + baristaMoney.getAmount() / (someVar++ - 7) + " average");
                 profit.setAmount(0);
                 counter = new Date();
             }
