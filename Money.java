@@ -1,17 +1,21 @@
 abstract class Money{
 
     protected String currency;
-    protected int amount;
+    protected double amount;
 
     public String getCurrency() {
         return currency;
     }
 
-    public void setAmount(int quantity){
+    public void setAmount(double quantity){
+        this.amount = quantity;
+    }
+
+    public void addAmount(double quantity){
         this.amount += quantity;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 }

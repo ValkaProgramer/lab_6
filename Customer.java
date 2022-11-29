@@ -4,13 +4,13 @@ public class Customer extends Person {
     
     private Beverage beverage;
 
-    public Customer(Menu menu){
+    public Customer(Menu menu, int season){
         setName();
-        setBeverage(menu);
+        setBeverage(menu, season);
     }
 
     protected void setName(){
-        switch (new Random().nextInt(10)) {
+        switch (new Random().nextInt(21)) {
             case 0: this.name = "Jayce";
                 break;
             case 1: this.name = "Alice";
@@ -51,15 +51,15 @@ public class Customer extends Person {
                 break;
             case 19: this.name = "Tommy";
                 break;
-            case 20: this.name = "Gamorax`";
+            case 20: this.name = "Gamora";
                 break;
             default:
                 break;
         }
     }
 
-    private void setBeverage(Menu menu){
-        this.beverage = menu.getBeverage(new Random().nextInt(8));
+    private void setBeverage(Menu menu, int season){
+        this.beverage = menu.getBeverage(new Random().nextInt(season == 1 ? 4 : 8));
     }
 
     public Beverage getBeverage(){

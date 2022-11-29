@@ -46,7 +46,7 @@ class Queue{
             if(isEmpty()) rear = null;
             size--;
             System.out.println(done.getBeverage().name + " for " + done.name + " is ready!");
-            profit.setAmount(done.getBeverage().price);
+            profit.addAmount(done.getBeverage().price);
         } else if(new Random().nextBoolean()){
             System.out.println(done.name + " is ready to wait, but your chances on tips are small");
             chance *= 0.25;
@@ -57,6 +57,7 @@ class Queue{
             if(isEmpty()) rear = null;
             size--;
             chance = 0;
+            profit.addAmount(done.getBeverage().price * -0.7);
             return;
         }
     }
@@ -65,13 +66,13 @@ class Queue{
         return !isEmpty() ? front.info : null;
     }
 
-    public void updateQueue(Menu menu){
+    public void updateQueue(Menu menu, int season, int day){
         spawnEnd = new Date().getTime() / 1000;
 
         if(cooldown.getInterval() < spawnEnd - spawnStart){
-            cooldown.setInterval();
+            cooldown.setInterval(day);
             spawnStart = spawnEnd;
-            this.enqueue(new Customer(menu));
+            this.enqueue(new Customer(menu, season));
         }
     }
 }
