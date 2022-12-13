@@ -15,9 +15,9 @@ class Menu{
         return this.beverages[id];
     }
 
-    public void get(Presenter presenter){
+    public void get(View view){
         for (Beverage beverage : beverages) {
-            presenter.printMenu(beverage);
+            view.printMenu(beverage);
         }
     }
 }

@@ -19,7 +19,7 @@ class Simulation{
         
         int someVar = 7;
 
-        Presenter presenter = new Presenter();
+        View view = new View();
 
         Profit profit = new Profit(), yourMoney = new Profit(), baristaMoney = new Profit();
         Tips tips = new Tips();
@@ -33,36 +33,36 @@ class Simulation{
 
 
 
-        menu.get(presenter);
+        menu.get(view);
 
         while(someVar <= 24){
 
-            queue.updateQueue(menu, Integer.parseInt(prop.getProperty("season")), Integer.parseInt(prop.getProperty("day")), presenter);
+            queue.updateQueue(menu, Integer.parseInt(prop.getProperty("season")), Integer.parseInt(prop.getProperty("day")), view);
 
             if (!queue.isEmpty()) {
                 isWrittenOnce = false;
             }
 
             if(queue.isEmpty() && !isWrittenOnce){
-                presenter.printCustomerWaiting();
+                view.printCustomerWaiting();
                 isWrittenOnce = true;
             }
 
             if(!queue.isEmpty()){
-                bool = barista.makeBeverage(queue.front().getBeverage(), presenter);
-                queue.dequeue(profit, bool, chance, presenter);
-                presenter.printCurrentProfit(profit);
+                bool = barista.makeBeverage(queue.front().getBeverage(), view);
+                queue.dequeue(profit, bool, chance, view);
+                view.printCurrentProfit(profit);
                 if(chance >= new Random().nextInt(100)) tips.addAmount(rand.nextInt(9));
-                presenter.printCurrentTips(tips);
+                view.printCurrentTips(tips);
                 chance = 16;
             }
 
             if((new Date().getTime() - counter.getTime()) > 60000){
-                presenter.printMoneyDistribution(someVar++);
+                view.printMoneyDistribution(someVar++);
                 yourMoney.addAmount(0.2 * profit.getAmount());
-                presenter.printTodayMoney(yourMoney);
+                view.printTodayMoney(yourMoney);
                 baristaMoney.addAmount(profit.getAmount() * 0.5);
-                presenter.printAverageSalary(baristaMoney, someVar);
+                view.printAverageSalary(baristaMoney, someVar);
                 profit.setAmount(0);
                 counter = new Date();
             }

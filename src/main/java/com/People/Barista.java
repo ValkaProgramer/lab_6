@@ -18,13 +18,13 @@ public class Barista extends Person{
 
     }
 
-    public boolean makeBeverage(Beverage beverage, Presenter presenter){
+    public boolean makeBeverage(Beverage beverage, View view){
 
         Date start = new Date();
-        boolean isDoneSuccessfully = beverage.type == "Coffee" ? makeCoffee(presenter) :
-        beverage.type == "Milkshake" ? makeMilkshake(presenter) : 
-        beverage.type == "Smoothie" ? makeSmoothie(presenter) : 
-        beverage.type == "Cold Coffee" ? makeColdCoffee(presenter) : makeLemonade(presenter);
+        boolean isDoneSuccessfully = beverage.type == "Coffee" ? makeCoffee(view) :
+        beverage.type == "Milkshake" ? makeMilkshake(view) : 
+        beverage.type == "Smoothie" ? makeSmoothie(view) : 
+        beverage.type == "Cold Coffee" ? makeColdCoffee(view) : makeLemonade(view);
 
         while(true){
             Date now = new Date();
@@ -34,59 +34,59 @@ public class Barista extends Person{
         return isDoneSuccessfully; 
     }
 
-    private boolean addMilk(Presenter presenter){
+    private boolean addMilk(View view){
         boolean success = new Random().nextInt(100) * this.efficiency / 2.5 > 3;
-        if (!success) presenter.printMilkFail();
+        if (!success) view.printMilkFail();
         return success;
     }
 
-    private boolean boilWater(Presenter presenter){
+    private boolean boilWater(View view){
         boolean success = new Random().nextInt(100) * this.efficiency / 2.5 > 3;
-        if (!success) presenter.printWaterFail();
+        if (!success) view.printWaterFail();
         return success;
     }
 
-    private boolean mixCoffee(Presenter presenter){
+    private boolean mixCoffee(View view){
         boolean success = new Random().nextInt(1000) * this.efficiency / 2.5 > 9;
-        if (!success) presenter.printMixFail();
+        if (!success) view.printMixFail();
         return success;
     }
 
-    private boolean grindIce(Presenter presenter){
+    private boolean grindIce(View view){
         boolean success = new Random().nextInt(100) * this.efficiency / 2.5 > 2;
-        if (!success) presenter.printIceFail();
+        if (!success) view.printIceFail();
         return success;
     }
 
-    private boolean squishLemon(Presenter presenter){
+    private boolean squishLemon(View view){
         boolean success = new Random().nextInt(100) * this.efficiency / 2.5 > 3;
-        if (!success) presenter.printLemonFail();
+        if (!success) view.printLemonFail();
         return success;
     }
 
-    private boolean grindFruits(Presenter presenter){
+    private boolean grindFruits(View view){
         boolean success = new Random().nextInt(100) * this.efficiency / 2.5 > 3;
-        if (!success) presenter.printFruitFail();
+        if (!success) view.printFruitFail();
         return success;
     }
 
-    public boolean makeCoffee(Presenter presenter){
-        return addMilk(presenter) && boilWater(presenter) && mixCoffee(presenter);
+    public boolean makeCoffee(View view){
+        return addMilk(view) && boilWater(view) && mixCoffee(view);
     }
 
-    public boolean makeColdCoffee(Presenter presenter){
-        return addMilk(presenter) && mixCoffee(presenter);
+    public boolean makeColdCoffee(View view){
+        return addMilk(view) && mixCoffee(view);
     }
 
-    private boolean makeLemonade(Presenter presenter){
-        return grindIce(presenter) && squishLemon(presenter);
+    private boolean makeLemonade(View view){
+        return grindIce(view) && squishLemon(view);
     }
 
-    private boolean makeMilkshake(Presenter presenter){
-        return grindIce(presenter) && addMilk(presenter);
+    private boolean makeMilkshake(View view){
+        return grindIce(view) && addMilk(view);
     }
 
-    private boolean makeSmoothie(Presenter presenter){
-        return grindIce(presenter) && grindFruits(presenter) && addMilk(presenter);
+    private boolean makeSmoothie(View view){
+        return grindIce(view) && grindFruits(view) && addMilk(view);
     }
 }

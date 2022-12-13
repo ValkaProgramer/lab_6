@@ -24,7 +24,7 @@ class Queue{
         return size == 0;
     }
 
-    public void enqueue(Customer customer, Presenter presenter){
+    public void enqueue(Customer customer, View view){
         if(isEmpty()){
             rear = new Node();
             rear.info = customer;
@@ -36,23 +36,23 @@ class Queue{
             rear = rear.next;
         }
         size++;
-        presenter.printOrder(customer);
+        view.printOrder(customer);
     }
 
-    public void dequeue(Profit profit, boolean bool, float chance, Presenter presenter){
+    public void dequeue(Profit profit, boolean bool, float chance, View view){
         Customer done = front.info;
         if(bool){
             front = front.next;
             if(isEmpty()) rear = null;
             size--;
-            presenter.printBeverageDone(done);
+            view.printBeverageDone(done);
             profit.addAmount(done.getBeverage().price);
         } else if(new Random().nextBoolean()){
-            presenter.printSmallFail(done);
+            view.printSmallFail(done);
             chance *= 0.25;
             return;
         } else {
-            presenter.printBigFail(done);
+            view.printBigFail(done);
             front = front.next;
             if(isEmpty()) rear = null;
             size--;
@@ -66,13 +66,13 @@ class Queue{
         return !isEmpty() ? front.info : null;
     }
 
-    public void updateQueue(Menu menu, int season, int day, Presenter presenter){
+    public void updateQueue(Menu menu, int season, int day, View view){
         spawnEnd = new Date().getTime() / 1000;
 
         if(cooldown.getInterval() < spawnEnd - spawnStart){
             cooldown.setInterval(day);
             spawnStart = spawnEnd;
-            this.enqueue(new Customer(menu, season), presenter);
+            this.enqueue(new Customer(menu, season), view);
         }
     }
 }

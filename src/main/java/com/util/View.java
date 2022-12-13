@@ -1,4 +1,4 @@
-public class Presenter {
+public class View {
     public void printCustomerWaiting(){
         System.out.println("--------------------------------------------------------\n" + 
         "Waiting for customers...\n" + "--------------------------------------------------------");
