@@ -24,7 +24,7 @@ class Queue{
         return size == 0;
     }
 
-    public void enqueue(Customer customer){
+    public void enqueue(Customer customer, Presenter presenter){
         if(isEmpty()){
             rear = new Node();
             rear.info = customer;
@@ -36,23 +36,23 @@ class Queue{
             rear = rear.next;
         }
         size++;
-        System.out.println(customer.name + " ordered one " + customer.getBeverage().name);
+        presenter.printOrder(customer);
     }
 
-    public void dequeue(Profit profit, boolean bool, float chance){
+    public void dequeue(Profit profit, boolean bool, float chance, Presenter presenter){
         Customer done = front.info;
         if(bool){
             front = front.next;
             if(isEmpty()) rear = null;
             size--;
-            System.out.println(done.getBeverage().name + " for " + done.name + " is ready!");
+            presenter.printBeverageDone(done);
             profit.addAmount(done.getBeverage().price);
         } else if(new Random().nextBoolean()){
-            System.out.println(done.name + " is ready to wait, but your chances on tips are small");
+            presenter.printSmallFail(done);
             chance *= 0.25;
             return;
         } else {
-            System.out.println(done.name + " was so pissed of (s)he left, no need for another " + done.getBeverage().name);
+            presenter.printBigFail(done);
             front = front.next;
             if(isEmpty()) rear = null;
             size--;
@@ -66,13 +66,13 @@ class Queue{
         return !isEmpty() ? front.info : null;
     }
 
-    public void updateQueue(Menu menu, int season, int day){
+    public void updateQueue(Menu menu, int season, int day, Presenter presenter){
         spawnEnd = new Date().getTime() / 1000;
 
         if(cooldown.getInterval() < spawnEnd - spawnStart){
             cooldown.setInterval(day);
             spawnStart = spawnEnd;
-            this.enqueue(new Customer(menu, season));
+            this.enqueue(new Customer(menu, season), presenter);
         }
     }
 }

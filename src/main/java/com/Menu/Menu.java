@@ -15,12 +15,9 @@ class Menu{
         return this.beverages[id];
     }
 
-    public void get(){
+    public void get(Presenter presenter){
         for (Beverage beverage : beverages) {
-            System.out.println(beverage.name);
-            System.out.println(beverage.amount + "gr");
-            System.out.println(beverage.price + " MDL");
-            System.out.println("---------------------------------------");
+            presenter.printMenu(beverage);
         }
     }
 }
